@@ -1,18 +1,13 @@
 trigger:
-- main
+- Dev
 
 pool:
   vmImage: ubuntu-latest
 strategy:
   matrix:
-    Python37:
-      python.version: '3.7'
-    Python38:
-      python.version: '3.8'
     Python39:
       python.version: '3.9'
-    Python310:
-      python.version: '3.10'
+ 
 
 steps:
 - task: UsePythonVersion@0
@@ -26,7 +21,11 @@ steps:
     pip install -r requirements.txt
   displayName: 'Install dependencies'
 
+- task: UsePythonVersion@0
+  displayName: 'Build and test '
+  inputs:
+  scriptSource: 'inline'
 - script: |
-    pip install pytest pytest-azurepipelines
-    pytest
-  displayName: 'pytest'
+    pip install pytest
+    python -m pytest
+    python -m build
