@@ -10,7 +10,7 @@ resources:
 
 variables:
   # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: '5f0b25ad-6aa5-4413-b545-09719d714fa9'
+  dockerRegistryServiceConnection: 'ACRPRODKYRO'
   imageRepository: 'Prodapi'
   containerRegistry: 'ACRPRODKYRO.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/cosmosdb-with-fastapi/DockerFile'
