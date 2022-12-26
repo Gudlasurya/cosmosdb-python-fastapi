@@ -15,7 +15,7 @@ RUN pip install -r requirements.txt
 ADD ./ .
 
 # Set the command to run the application, using the environment variables
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "80"]
+CMD ["uvicorn", "main:app", "----db2-username", "$DB2_USERNAME","--db2-password", "$DB2_PASSWORD","--host", "0.0.0.0", "--port", "80"]
 
 # Set the environment variables
 ENV DB2_USERNAME=$DB2_USERNAME
