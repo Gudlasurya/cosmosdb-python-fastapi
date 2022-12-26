@@ -14,7 +14,7 @@ variables:
   imageRepository: 'Prodapi'
   containerRegistry: 'ACRPRODKYRO.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/cosmosdb-with-fastapi/DockerFile'
-  tag: build.buildId
+  tag: $(Build.BuildId)
 
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
