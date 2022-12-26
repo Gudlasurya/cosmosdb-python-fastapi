@@ -1,18 +1,22 @@
-FROM python As base
+FROM python:3.8-slim
+
+# Declare the build argument
+ARG DB2_USERNAME
+ARG DB2_PASSWORD
+
+# Set the working directory
 WORKDIR /app
-FROM base AS dependencies
+
+# Install any dependencies
 COPY requirements.txt ./
 RUN pip install -r requirements.txt
-#---copy application file from local to the image/build----
-FROM dependencies AS build
-WORKDIR /app
+
+# Copy the application code
 ADD ./ .
-#FROM python AS release
-#WORKDIR /app
-#COPY --from=dependencies /app/requirements.txt ./
-#COPY --from=dependencies /root/.cache /root/.cache
-#RUN pip install -r requirements.txt
-#COPY --from=build /app/ ./
-#WORKDIR /app/cosmosdb-with-fastapi/
-#CMD ["uvicorn", "--config", "./cosmosdb-python-fastapi/cosmosdb-with-fastapi/main.py", "cosmosdb-python-fastapi:app"]
+
+# Set the command to run the application, using the environment variables
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "80"]
+
+# Set the environment variables
+ENV DB2_USERNAME=$DB2_USERNAME
+ENV DB2_PASSWORD=$DB2_PASSWORD
