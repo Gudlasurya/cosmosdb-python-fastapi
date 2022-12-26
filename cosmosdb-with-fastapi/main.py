@@ -7,8 +7,8 @@ import os
 #
 URI = os.environ["DB2_USERNAME"]
 KEY = os.environ["DB2_PASSWORD"]
-print("Running with user: %s" %URI)
-print("Running with user: %s" %KEY)
+#print("Running with user: %s" %URI)
+#print("Running with user: %s" %KEY)
 #config = dotenv_values(".env")
 app = FastAPI()
 DATABASE_NAME = "todo-db"
@@ -18,8 +18,8 @@ app.include_router(todo_router, tags=["todos"], prefix="/todos")
 
 @app.on_event("startup")
 async def startup_db_client():
-     print(f"URI: {URI}")
-     print(f"KEY: {KEY}")
+   #  print(f"URI: {URI}")
+   #  print(f"KEY: {KEY}")
    # app.cosmos_client = CosmosClient(config["URI"], credential = config["KEY"])
      print(f"DB2_USERNAME: {URI}")
      app.cosmos_client = CosmosClient(URI, credential = KEY)
