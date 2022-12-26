@@ -30,7 +30,7 @@ COPY --from=build /app /app
 # Set the environment variables
 ENV DB2_USERNAME=$DB2_USERNAME
 ENV DB2_PASSWORD=$DB2_PASSWORD
-
+Run echo 'args -${DB2_USERNAME}'
 # Set the command to run the application, using the environment variables
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "80"]
 
