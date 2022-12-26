@@ -1,4 +1,5 @@
-FROM python:3.8-slim
+# Stage 1: Build the application
+FROM python:3.8-slim as build
 
 # Declare the build argument
 ARG DB2_USERNAME
@@ -14,13 +15,22 @@ RUN pip install -r requirements.txt
 # Copy the application code
 ADD ./ .
 
-# Set the command to run the application, using the environment variables
-#CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "80"]
+# Build the application
+RUN python -m compileall .
+
+# Stage 2: Run the application
+FROM python:3.8-slim as run
+
+# Set the working directory
+WORKDIR /app
+
+# Copy the built application from the previous stage
+COPY --from=build /app /app
 
 # Set the environment variables
 ENV DB2_USERNAME=$DB2_USERNAME
 ENV DB2_PASSWORD=$DB2_PASSWORD
 
-
 # Set the command to run the application, using the environment variables
- CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "80"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "80"]
+

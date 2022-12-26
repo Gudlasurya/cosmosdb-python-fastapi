@@ -1,0 +1,26 @@
+FROM python:3.8-slim
+
+# Declare the build argument
+ARG DB2_USERNAME
+ARG DB2_PASSWORD
+
+# Set the working directory
+WORKDIR /app
+
+# Install any dependencies
+COPY requirements.txt ./
+RUN pip install -r requirements.txt
+
+# Copy the application code
+ADD ./ .
+
+# Set the command to run the application, using the environment variables
+#CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "80"]
+
+# Set the environment variables
+ENV DB2_USERNAME=$DB2_USERNAME
+ENV DB2_PASSWORD=$DB2_PASSWORD
+
+
+# Set the command to run the application, using the environment variables
+ CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "80"]
