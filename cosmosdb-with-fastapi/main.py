@@ -4,7 +4,7 @@ from azure.cosmos.aio import CosmosClient
 from azure.cosmos import PartitionKey, exceptions
 from routes import router as todo_router
 import os
-
+#
 URI = os.environ["DB2_USERNAME"]
 KEY = os.environ["DB2_PASSWORD"]
 print("Running with user: %s" %URI)
