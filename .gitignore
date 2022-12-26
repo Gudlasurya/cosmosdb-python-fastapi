@@ -20,6 +20,7 @@ azure-pipelines-1.yml
 azure-pipelines-2.yml
 # Mono auto generated files
 mono_crash.*
+#
 
 # .yaml
 *.yml
