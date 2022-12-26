@@ -7,7 +7,8 @@ import os
 
 URI = os.environ["DB2_USERNAME"]
 KEY = os.environ["DB2_PASSWORD"]
-
+print("Running with user: %s" %DB2_USERNAME)
+print("Running with user: %s" %DB2_PASSWORD)
 #config = dotenv_values(".env")
 app = FastAPI()
 DATABASE_NAME = "todo-db"
