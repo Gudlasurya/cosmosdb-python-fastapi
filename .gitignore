@@ -13,7 +13,7 @@
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
-#.yml ignore
+#ignore the yaml files 
 *.yml
 azure-pipelines.yml
 azure-pipelines-1.yml
