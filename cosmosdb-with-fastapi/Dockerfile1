@@ -1,0 +1,27 @@
+# First stage: build the application
+FROM python:3.9 as builder
+
+WORKDIR /app
+ADD ./ .
+
+# Create a virtual environment
+RUN python -m venv /app/venv
+
+# Activate the virtual environment
+ENV PATH="/app/venv/bin:$PATH"
+RUN echo "$PATH"
+
+RUN pip install --upgrade pip
+RUN pip install -r requirements.txt
+
+# Second stage: create a smaller container with only the runtime dependencies
+FROM python:3.9-slim-buster
+
+COPY --from=builder /app /app
+
+#Activate the virtual environment
+ENV PATH="/app/venv/bin:$PATH"
+
+WORKDIR /app
+
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]
